@@ -1,1 +1,2 @@
-### trabajando con nodejs, mysql y sequelize orm
+### trabajando con nodejs, mysql y sequelize orm. 
+## ORM

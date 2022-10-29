@@ -1,0 +1,22 @@
+{
+  "name": "crud_app_sequelize",
+  "version": "0.0.1",
+  "description": "crud con sequelize orm",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "kaiserkey",
+  "license": "ISC",
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mariadb": "^3.0.2",
+    "pug": "^3.0.2",
+    "sequelize": "^6.25.3"
+  }
+}

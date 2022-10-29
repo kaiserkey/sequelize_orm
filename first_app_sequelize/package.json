@@ -1,0 +1,30 @@
+{
+  "name": "sequelize_orm",
+  "version": "0.0.1",
+  "description": "aprendiendo a utilizar sequelize orm",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaiserkey/sequelize_orm.git"
+  },
+  "author": "kaiserkey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaiserkey/sequelize_orm/issues"
+  },
+  "homepage": "https://github.com/kaiserkey/sequelize_orm#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mariadb": "^3.0.2",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2",
+    "sequelize": "^6.25.3"
+  }
+}
