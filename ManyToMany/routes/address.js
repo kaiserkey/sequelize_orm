@@ -21,7 +21,7 @@ router.post('/create', async (req, res)=>{
     res.json( await Address.create(
         {
             street: req.body.street,
-            userId: 3
+            userId: req.body.id
         }
     ))
 })

@@ -43,7 +43,7 @@ router.post('/create', async (req, res)=>{
                 name: req.body.name,
                 email: req.body.email,
                 age: req.body.age,
-                role: req.body.role,
+                role: req.body.role
             }
         ))
     }catch(e){

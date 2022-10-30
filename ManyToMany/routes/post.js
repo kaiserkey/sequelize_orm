@@ -32,7 +32,7 @@ router.post('/create', async (req, res)=>{
         {
             title: req.body.title,
             body: req.body.body,
-            userId: 1
+            userId: req.body.id
         }
     ))
 })

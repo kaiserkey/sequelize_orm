@@ -5,25 +5,10 @@ const express = require( 'express' ),
         morgan = require( 'morgan' ),
         publicDir = express.static( `${__dirname}/publics` ),
         viewsDir = `${__dirname}/views`,
-        address = require('./routes/address'),
-        user = require('./routes/user'),
-        post = require('./routes/post'),
-        band = require('./routes/band'),
         port = ( process.env.PORT || 4000 ),
         app = express(),
-        sequelize = require('./database/db')
+        Connection = require('./database/db')
 
-require('./database/associations')
-
-//inicializar la coneccion a la base de datos
-async function con(){
-    try{
-        await sequelize.sync({force: false})
-        console.log('Conectado a la base de datos...')
-    }catch(e){
-        console.log('Error al conectar a la base de datos: ', e)
-    }
-}  
 
 function err404(req, res, next){
     let err = new Error(),
@@ -47,15 +32,13 @@ app// configurando app
     .use( publicDir )
     .use( morgan('dev') )
     //ejecutando el middleware enrutador
-    .use( '/api/post', post )
-    .use( '/api/user', user )
-    .use('/api/address', address)
-    .use('/api/band', band)
+app.get('/', (req, res)=>{
+        res.end('<h1>Hello!!</h1>')
+    })    
     //manejador de errores
     .use(err404)
     .listen(port, ()=>{
         console.log(`Iniciando en el puerto ${port}`)
-        con()
+        Connection.con()
     })
 
-module.exports = app
