@@ -5,6 +5,17 @@ const { dbConfig } = require('../database/db_con'),
         { body, validationResult } = require('express-validator')
 
 module.exports = {
+
+    async find(req, res, next){
+        const post = await dbConfig.Post.findByPk(req.body.id)
+        if(!post){
+            res.status(404).json({ msg: 'El post no ha sido encontrado' })
+        }else{
+            req.post = post
+            next()
+        }
+    },
+
     async index(req,res){
         const posts = await dbConfig.Post.findAll()
 
@@ -12,35 +23,20 @@ module.exports = {
     },
 
     async show(req, res){
-        const post = await dbConfig.Post.findByPk(req.body.id)
-        if(!post){
-            res.status(404).json({ msg: 'El post no ha sido encontrado' })
-        }else{
-            res.json(post)
-        }
+            res.json(req.post)
     },
 
     async delete(req, res){
-        const post = await dbConfig.Post.findByPk(req.body.id)
-        if(!post){
-            res.status(404).json({ msg: 'El post no ha sido encontrado' })
-        }else{
-            await post.destroy()
-            res.json({ msg: 'El post fue eliminado'})
-        }
+        await req.post.destroy()
+        res.json({ msg: 'El post fue eliminado'})
     },
 
     async update(req, res){
-        const post = await dbConfig.Post.findByPk(req.body.id)
-        if(!post){
-            res.status(404).json({ msg: 'El post no ha sido encontrado' })
-        }else{
-            post.title = req.body.title
-            post.body = req.body.body
+        req.post.title = req.body.title
+        req.post.body = req.body.body
 
-            await post.save()
+        await req.post.save()
 
-            res.json(post)
-        }
+        res.json(req.post)
     },
 }

@@ -7,8 +7,19 @@ const express = require('express'),
         //Middlewares
         routes_protect = require('../middlewares/routes_protect')
 
+        function err404(req, res, next){
+            let err = new Error(),
+            locals = {
+                title: 'Error 404',
+                description: 'Recurso no encontrado',
+                error: err
+            }
+            err.status = (err.status || 404);
+            res.render('error', locals)
+            next()
+        }
 
-router.get('/', (req, res)=>{
+router.get('/' ,(req, res)=>{
     res.render('index', {hola: 'hello'})
 })
 
@@ -22,11 +33,12 @@ router.post('/signup',
             AuthController.signUp)
 
 router.get('/posts', routes_protect , PostController.index)
-router.get('/posts/all' , PostController.index)
-router.post('/posts/update' , PostController.update)
-router.post('/posts/delete' , PostController.delete)
-router.post('/posts/show' , PostController.show)
+router.get('/posts/all' ,PostController.index)
+router.post('/posts/update' ,PostController.find, PostController.update)
+router.post('/posts/delete' ,PostController.find, PostController.delete)
+router.post('/posts/show' , PostController.find,PostController.show)
 
+router.use(err404)
 
 
 
