@@ -41,11 +41,13 @@ class Connection{
         //vinculamos los modelos a la base de datos
         connection.User = require('../models/User')(connection.init, DataTypes)
         connection.Post = require('../models/Post')(connection.init, DataTypes)
+        connection.Role = require('../models/Role')(connection.init, DataTypes)
         // connection.Address = require('../models/Address')(connection.init, DataTypes)
         
         //asociar los modelos
         connection.User.associate(connection)
         connection.Post.associate(connection)
+        connection.Role.associate(connection)
         // connection.Address.associate(connection)
 
         return connection

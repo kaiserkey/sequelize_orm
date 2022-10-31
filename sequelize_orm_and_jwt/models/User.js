@@ -8,6 +8,7 @@ class User extends Model {
 
   static associate(models) {
     User.hasMany(models.Post, {as: 'posts', foreignKey: 'user_id'})
+    User.belongsToMany(models.Role, { as: 'users', through: 'user_role', foreignKey: 'role_id' })
   }
 
 }

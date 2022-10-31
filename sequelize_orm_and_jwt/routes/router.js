@@ -22,6 +22,10 @@ router.post('/signup',
             AuthController.signUp)
 
 router.get('/posts', routes_protect , PostController.index)
+router.get('/posts/all' , PostController.index)
+router.post('/posts/update' , PostController.update)
+router.post('/posts/delete' , PostController.delete)
+router.post('/posts/show' , PostController.show)
 
 
 

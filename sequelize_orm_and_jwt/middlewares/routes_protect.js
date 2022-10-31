@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken'),
-        auth = require('../config/auth')
+        auth = require('../config/auth'),
+        { dbConfig } = require('../database/db_con')
 
 module.exports = (req, res, next)=>{
     //const tokenCookie = req.cookies['x-access-token'];
@@ -21,8 +22,13 @@ module.exports = (req, res, next)=>{
                     msg: 'Ocurrio un problema en la autenticacion del token'
                 })
             }else{
-                req.user = decoded
-                next()
+                dbConfig.User.findByPk( decoded.user.id, { include: 'users' } ).then(
+                    user => {
+                        console.log(user.users[0].role)
+                        req.user = user
+                        next()
+                    }
+                )
             }
         })
         
